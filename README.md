@@ -4,19 +4,16 @@
 # miquido-terraform-alb
 This module Application Load Balancer along with AWS ACM TLS/SSL certificate via ACM Request
 ---
-
-
 Terraform Module
 
-## Makefile Targets
-```
-Available targets:
+BitBucket Repository: https://bitbucket.org/miquido/terraform-alb
+## Usage
 
-  help                                Help screen
-  help/all                            Display help for all targets
-  help/short                          This help short screen
-  lint                                Lint terraform code
-
+```hcl
+module {
+  source = "git::ssh://git@bitbucket.org/miquido/terraform-alb.git?ref=master"
+  ...
+}
 ```
 ## Inputs
 
@@ -51,6 +48,16 @@ Available targets:
 | listener_arns | A list of all the listener ARNs |
 | security_group_id | The security group ID of the ALB |
 
+## Makefile Targets
+```
+Available targets:
+
+  help                                Help screen
+  help/all                            Display help for all targets
+  help/short                          This help short screen
+  lint                                Lint terraform code
+
+```
 
 
 ## Developing
@@ -88,3 +95,4 @@ Copyright © 2017-2019 [Miquido](https://miquido.com)
   [logo]: https://www.miquido.com/img/logos/logo__miquido.svg
   [website]: https://www.miquido.com/
   [github]: https://github.com/miquido
+  [bitbucket]: https://bitbucket.org/miquido
