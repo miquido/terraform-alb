@@ -18,7 +18,6 @@ module "alb" {
   ip_address_type = "ipv4"
   http_port       = "80"
   http_enabled    = "true"
-  http_port       = "80"
   https_enabled   = "true"
   https_port      = "443"
   http2_enabled   = "true"
