@@ -44,3 +44,19 @@ variable "security_group_ids" {
   default     = []
   description = "A list of additional security group IDs to allow access to ALB"
 }
+
+variable "enable_redirect_http_to_https" {
+  type        = "string"
+  default     = "false"
+  description = "Attach rule to HTTP listener that redirects "
+}
+
+variable "redirect_http_to_https_priority" {
+  default     = 5
+  description = "HTTP Listener Rule priority"
+}
+
+variable "redirect_http_to_https_status_code" {
+  default     = "HTTP_301"
+  description = "The HTTP redirect code. The redirect is either permanent (HTTP_301) or temporary (HTTP_302)"
+}

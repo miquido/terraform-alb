@@ -29,6 +29,28 @@ module "alb" {
   certificate_arn    = "${module.acm-request.arn}"
 }
 
+resource "aws_lb_listener_rule" "redirect_http_to_https" {
+  count = "${var.enable_redirect_http_to_https == "true" ? 1 : 0}"
+
+  listener_arn = "${module.alb.http_listener_arn}"
+  priority     = "${var.redirect_http_to_https_priority}"
+
+  action {
+    type = "redirect"
+
+    redirect {
+      port        = "443"
+      protocol    = "HTTPS"
+      status_code = "${var.redirect_http_to_https_status_code}"
+    }
+  }
+
+  condition {
+    field  = "host-header"
+    values = ["*${var.domain}"]
+  }
+}
+
 resource "aws_s3_bucket_public_access_block" "alb-logs" {
   bucket                  = "${module.alb.access_logs_bucket_id}"
   block_public_acls       = true

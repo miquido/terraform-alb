@@ -20,9 +20,12 @@ module {
 | Name | Description | Type | Default | Required |
 |------|-------------|:----:|:-----:|:-----:|
 | domain | Domain to request ACM certificate for root domain and wildcard SAN | string | `` | no |
+| enable_redirect_http_to_https | Attach rule to HTTP listener that redirects | string | `false` | no |
 | environment | Environment name | string | `` | no |
 | name | Resource common name | string | - | yes |
 | project | Account/Project Name | string | - | yes |
+| redirect_http_to_https_priority | HTTP Listener Rule priority | string | `5` | no |
+| redirect_http_to_https_status_code | The HTTP redirect code. The redirect is either permanent (HTTP_301) or temporary (HTTP_302) | string | `HTTP_301` | no |
 | region | AWS Region | string | - | yes |
 | security_group_ids | A list of additional security group IDs to allow access to ALB | list | `<list>` | no |
 | subnet_ids | Private subnet IDs | list | - | yes |
