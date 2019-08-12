@@ -71,7 +71,6 @@ variable "acm_certificate_request_enabled" {
   description = "Whether to generate ACM certificate automatically"
 }
 
-
 variable "wait_for_certificate_issued" {
   default     = "false"
   description = "Whether to wait for the certificate to be issued by ACM (the certificate status changed from Pending Validation to Issued)"

@@ -1,10 +1,10 @@
 locals {
-  sans = "${length(var.subject_alternative_names) == 0 ? list("*.${var.domain}") : var.subject_alternative_names}"
+  default_sans = ["*.${var.domain}"]
+  sans         = "${split(",", length(var.subject_alternative_names) == 0 ? join(",", local.default_sans) : join(",", var.subject_alternative_names))}"
 }
 
-
 module "acm-request" {
-  source = "git::https://github.com/k911/terraform-aws-acm-request-certificate.git?ref=tags/0.4.0-terraform0.11"
+  source = "git::https://github.com/k911/terraform-aws-acm-request-certificate.git?ref=tags/0.4.0-tf011"
 
   enabled                           = "${var.acm_certificate_request_enabled}"
   domain_name                       = "${var.domain}"
