@@ -2,18 +2,26 @@
 
 | Name | Description | Type | Default | Required |
 |------|-------------|:----:|:-----:|:-----:|
+| acm_certificate_arn | Provide ARN of custom ACM Certifcate. Used only if var.acm_certificate_request_enabled is false | string | `` | no |
+| acm_certificate_request_enabled | Whether to generate ACM certificate automatically | string | `true` | no |
 | domain | Domain to request ACM certificate for root domain and wildcard SAN | string | `` | no |
+| domain_ttl | The TTL of the record to add to the DNS zone to complete certificate validation | string | `300` | no |
 | enable_redirect_http_to_https | Attach rule to HTTP listener that redirects | string | `false` | no |
 | environment | Environment name | string | `` | no |
 | name | Resource common name | string | - | yes |
+| process_domain_validation_options | Flag to enable/disable processing of the record to add to the DNS zone to complete certificate validation | string | `true` | no |
 | project | Account/Project Name | string | - | yes |
 | redirect_http_to_https_priority | HTTP Listener Rule priority | string | `5` | no |
 | redirect_http_to_https_status_code | The HTTP redirect code. The redirect is either permanent (HTTP_301) or temporary (HTTP_302) | string | `HTTP_301` | no |
 | region | AWS Region | string | - | yes |
 | security_group_ids | A list of additional security group IDs to allow access to ALB | list | `<list>` | no |
+| subject_alternative_names | A list of domains that should be SANs in the issued certificate. By default wildcard is used: *.var.domain_name | list | `<list>` | no |
 | subnet_ids | Private subnet IDs | list | - | yes |
 | tags | Tags to apply on repository | map | `<map>` | no |
+| validation_method | Method to use for validation, DNS or EMAIL | string | `DNS` | no |
 | vpc_id | The VPC ID where resources are created | string | - | yes |
+| wait_for_certificate_issued | Whether to wait for the certificate to be issued by ACM (the certificate status changed from Pending Validation to Issued) | string | `false` | no |
+| zone_name | The name of the desired Route53 Hosted Zone for ACM Certificate (by default var.domain_name is used) | string | `` | no |
 
 ## Outputs
 

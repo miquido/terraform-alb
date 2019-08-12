@@ -60,3 +60,44 @@ variable "redirect_http_to_https_status_code" {
   default     = "HTTP_301"
   description = "The HTTP redirect code. The redirect is either permanent (HTTP_301) or temporary (HTTP_302)"
 }
+
+variable "zone_name" {
+  default     = ""
+  description = "The name of the desired Route53 Hosted Zone for ACM Certificate (by default var.domain_name is used)"
+}
+
+variable "acm_certificate_request_enabled" {
+  default     = "true"
+  description = "Whether to generate ACM certificate automatically"
+}
+
+
+variable "wait_for_certificate_issued" {
+  default     = "false"
+  description = "Whether to wait for the certificate to be issued by ACM (the certificate status changed from Pending Validation to Issued)"
+}
+
+variable "acm_certificate_arn" {
+  default     = ""
+  description = "Provide ARN of custom ACM Certifcate. Used only if var.acm_certificate_request_enabled is false"
+}
+
+variable "process_domain_validation_options" {
+  default     = "true"
+  description = "Flag to enable/disable processing of the record to add to the DNS zone to complete certificate validation"
+}
+
+variable "validation_method" {
+  default     = "DNS"
+  description = "Method to use for validation, DNS or EMAIL"
+}
+
+variable "domain_ttl" {
+  default     = "300"
+  description = "The TTL of the record to add to the DNS zone to complete certificate validation"
+}
+
+variable "subject_alternative_names" {
+  default     = []
+  description = "A list of domains that should be SANs in the issued certificate. By default wildcard is used: *.var.domain_name"
+}

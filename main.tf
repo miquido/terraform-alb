@@ -1,11 +1,19 @@
-module "acm-request" {
-  source = "git@github.com:cloudposse/terraform-aws-acm-request-certificate?ref=0.1.3"
+locals {
+  sans = "${length(var.subject_alternative_names) == 0 ? list("*.${var.domain}") : var.subject_alternative_names}"
+}
 
-  domain_name               = "${var.domain}"
-  validation_method         = "DNS"
-  ttl                       = "300"
-  subject_alternative_names = ["*.${var.domain}"]
-  tags                      = "${var.tags}"
+
+module "acm-request" {
+  source = "git::https://github.com/k911/terraform-aws-acm-request-certificate.git?ref=tags/0.4.0-terraform0.11"
+
+  enabled                           = "${var.acm_certificate_request_enabled}"
+  domain_name                       = "${var.domain}"
+  validation_method                 = "${var.validation_method}"
+  ttl                               = "${var.domain_ttl}"
+  subject_alternative_names         = "${local.sans}"
+  tags                              = "${var.tags}"
+  wait_for_certificate_issued       = "${var.wait_for_certificate_issued}"
+  process_domain_validation_options = "${var.process_domain_validation_options}"
 }
 
 module "alb" {
@@ -26,7 +34,7 @@ module "alb" {
   subnet_ids         = "${var.subnet_ids}"
   security_group_ids = "${var.security_group_ids}"
   access_logs_region = "${var.region}"
-  certificate_arn    = "${module.acm-request.arn}"
+  certificate_arn    = "${var.acm_certificate_request_enabled == "true" ? module.acm-request.arn : var.acm_certificate_arn}"
 }
 
 resource "aws_lb_listener_rule" "redirect_http_to_https" {
