@@ -23,12 +23,19 @@ module "alb" {
   stage     = "${var.environment}"
   tags      = "${var.tags}"
 
-  ip_address_type = "ipv4"
-  http_port       = "80"
-  http_enabled    = "true"
-  https_enabled   = "true"
-  https_port      = "443"
-  http2_enabled   = "true"
+  ip_address_type           = "ipv4"
+
+  http_port                    = "${var.http_port}"
+  http_enabled                 = "${var.http_enabled}"
+  http_ingress_cidr_blocks     = "${var.http_ingress_cidr_blocks}"
+  http_ingress_prefix_list_ids = "${var.http_ingress_prefix_list_ids}"
+
+  https_port                    = "${var.https_port}"
+  https_enabled                 = "${var.https_enabled}"
+  https_ingress_cidr_blocks     = "${var.https_ingress_cidr_blocks}"
+  https_ingress_prefix_list_ids = "${var.https_ingress_prefix_list_ids}"
+
+  http2_enabled             = "true"
 
   vpc_id             = "${var.vpc_id}"
   subnet_ids         = "${var.subnet_ids}"

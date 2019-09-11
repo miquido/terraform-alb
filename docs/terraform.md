@@ -8,6 +8,14 @@
 | domain_ttl | The TTL of the record to add to the DNS zone to complete certificate validation | string | `300` | no |
 | enable_redirect_http_to_https | Attach rule to HTTP listener that redirects | string | `false` | no |
 | environment | Environment name | string | `` | no |
+| http_enabled | A boolean flag to enable/disable HTTP listener | string | `true` | no |
+| http_ingress_cidr_blocks | List of CIDR blocks to allow in HTTP security group | list | `<list>` | no |
+| http_ingress_prefix_list_ids | List of prefix list IDs for allowing access to HTTP ingress security group | list | `<list>` | no |
+| http_port | The port for the HTTP listener | string | `80` | no |
+| https_enabled | A boolean flag to enable/disable HTTPS listener | string | `false` | no |
+| https_ingress_cidr_blocks | List of CIDR blocks to allow in HTTPS security group | list | `<list>` | no |
+| https_ingress_prefix_list_ids | List of prefix list IDs for allowing access to HTTPS ingress security group | list | `<list>` | no |
+| https_port | The port for the HTTPS listener | string | `443` | no |
 | name | Resource common name | string | - | yes |
 | process_domain_validation_options | Flag to enable/disable processing of the record to add to the DNS zone to complete certificate validation | string | `true` | no |
 | project | Account/Project Name | string | - | yes |
