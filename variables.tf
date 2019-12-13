@@ -30,7 +30,7 @@ variable "vpc_id" {
 }
 
 variable "subnet_ids" {
-  description = "Private subnet IDs"
+  description = "A list of (typically public) subnet IDs to associate with ALB."
   type        = list(string)
 }
 
@@ -41,8 +41,8 @@ variable "security_group_ids" {
 }
 
 variable "enable_redirect_http_to_https" {
-  type        = string
-  default     = "false"
+  type        = bool
+  default     = false
   description = "Attach rule to HTTP listener that redirects "
 }
 
@@ -56,19 +56,21 @@ variable "redirect_http_to_https_status_code" {
   description = "The HTTP redirect code. The redirect is either permanent (HTTP_301) or temporary (HTTP_302)"
 }
 
-variable "acm_certificate_arn" {
-  description = "Provide ARN of custom ACM Certificate."
+variable "internal" {
+  type        = bool
+  default     = false
+  description = "A boolean flag to determine whether the ALB should be internal"
 }
 
 variable "http_port" {
-  type        = string
-  default     = "80"
+  type        = number
+  default     = 80
   description = "The port for the HTTP listener"
 }
 
 variable "http_enabled" {
-  type        = string
-  default     = "true"
+  type        = bool
+  default     = true
   description = "A boolean flag to enable/disable HTTP listener"
 }
 
@@ -84,15 +86,21 @@ variable "http_ingress_prefix_list_ids" {
   description = "List of prefix list IDs for allowing access to HTTP ingress security group"
 }
 
-variable "https_port" {
+variable "acm_certificate_arn" {
   type        = string
-  default     = "443"
+  default     = ""
+  description = "The ARN of the default SSL certificate for HTTPS listener. Required if `https_enabled` is true."
+}
+
+variable "https_port" {
+  type        = number
+  default     = 443
   description = "The port for the HTTPS listener"
 }
 
 variable "https_enabled" {
-  type        = string
-  default     = "true"
+  type        = bool
+  default     = true
   description = "A boolean flag to enable/disable HTTPS listener"
 }
 
@@ -109,19 +117,44 @@ variable "https_ingress_prefix_list_ids" {
 }
 
 variable "https_ssl_policy" {
-  description = "The name of the SSL Policy for the listener."
-  default     = "ELBSecurityPolicy-2015-05"
+  type        = string
+  description = "The name of the SSL Policy for the listener"
+  default     = "ELBSecurityPolicy-2016-08"
+}
+
+variable "access_logs_prefix" {
+  type        = string
+  default     = ""
+  description = "The S3 log bucket prefix"
+}
+
+variable "access_logs_enabled" {
+  type        = bool
+  default     = true
+  description = "A boolean flag to enable/disable access_logs"
+}
+
+variable "access_logs_region" {
+  type        = string
+  default     = "us-east-1"
+  description = "The region for the access_logs S3 bucket"
 }
 
 variable "cross_zone_load_balancing_enabled" {
-  type        = string
-  default     = "false"
+  type        = bool
+  default     = false
   description = "A boolean flag to enable/disable cross zone load balancing"
 }
 
+variable "http2_enabled" {
+  type        = bool
+  default     = true
+  description = "A boolean flag to enable/disable HTTP/2"
+}
+
 variable "idle_timeout" {
-  type        = string
-  default     = "60"
+  type        = number
+  default     = 60
   description = "The time in seconds that the connection is allowed to be idle"
 }
 
@@ -131,27 +164,15 @@ variable "ip_address_type" {
   description = "The type of IP addresses used by the subnets for your load balancer. The possible values are `ipv4` and `dualstack`."
 }
 
-variable "internal" {
-  type        = string
-  default     = "false"
-  description = "A boolean flag to determine whether the ALB should be internal"
-}
-
 variable "deletion_protection_enabled" {
-  type        = string
-  default     = "false"
+  type        = bool
+  default     = false
   description = "A boolean flag to enable/disable deletion protection for ALB"
 }
 
-variable "http2_enabled" {
-  type        = string
-  default     = "true"
-  description = "A boolean flag to enable/disable HTTP/2"
-}
-
 variable "deregistration_delay" {
-  type        = string
-  default     = "15"
+  type        = number
+  default     = 15
   description = "The amount of time to wait in seconds before changing the state of a deregistering target to unused"
 }
 
@@ -162,26 +183,26 @@ variable "health_check_path" {
 }
 
 variable "health_check_timeout" {
-  type        = string
-  default     = "10"
+  type        = number
+  default     = 10
   description = "The amount of time to wait in seconds before failing a health check request"
 }
 
 variable "health_check_healthy_threshold" {
-  type        = string
-  default     = "2"
+  type        = number
+  default     = 2
   description = "The number of consecutive health checks successes required before considering an unhealthy target healthy"
 }
 
 variable "health_check_unhealthy_threshold" {
-  type        = string
-  default     = "2"
+  type        = number
+  default     = 2
   description = "The number of consecutive health check failures required before considering the target unhealthy"
 }
 
 variable "health_check_interval" {
-  type        = string
-  default     = "15"
+  type        = number
+  default     = 15
   description = "The duration in seconds in between health checks"
 }
 
@@ -191,32 +212,44 @@ variable "health_check_matcher" {
   description = "The HTTP response codes to indicate a healthy check"
 }
 
-variable "access_logs_prefix" {
-  type        = string
-  default     = ""
-  description = "The S3 bucket prefix"
-}
-
-variable "access_logs_enabled" {
-  type        = string
-  default     = "true"
-  description = "A boolean flag to enable/disable access_logs"
-}
-
-# TODO: Rename to "access_logs_region"
-variable "region" {
-  type        = string
-  default     = "eu-central-1"
-  description = "The region for the access_logs S3 bucket"
-}
-
 variable "access_logs_s3_bucket_force_destroy" {
-  description = "A boolean that indicates all objects should be deleted from the ALB access logs S3 bucket so that the bucket can be destroyed without error"
+  type        = bool
   default     = false
+  description = "A boolean that indicates all objects should be deleted from the ALB access logs S3 bucket so that the bucket can be destroyed without error"
 }
 
 variable "target_group_port" {
+  type        = number
+  default     = 80
   description = "The port for the default target group"
-  default     = "80"
 }
 
+variable "target_group_name" {
+  type        = string
+  default     = ""
+  description = "The name for the default target group, uses a module label name if left empty"
+}
+
+variable "target_group_target_type" {
+  type        = string
+  default     = "ip"
+  description = "The type (`instance`, `ip` or `lambda`) of targets that can be registered with the target group"
+}
+
+variable "target_group_additional_tags" {
+  type        = map(string)
+  default     = {}
+  description = "The additional tags to apply to the target group"
+}
+
+variable "http_ingress_ipv6_cidr_blocks" {
+  type        = list(string)
+  default     = ["::/0"]
+  description = "List of IPv6 CIDR blocks to allow in HTTP security group"
+}
+
+variable "https_ingress_ipv6_cidr_blocks" {
+  type        = list(string)
+  default     = ["::/0"]
+  description = "List of IPv6 CIDR blocks to allow in HTTPS security group"
+}
