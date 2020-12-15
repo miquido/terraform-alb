@@ -5,10 +5,10 @@ provider "aws" {
 module "alb" {
   source = "../../"
 
-  name = "alb"
-  project = "example"
+  name        = "alb"
+  project     = "example"
   environment = "test"
 
-  vpc_id = ""
+  vpc_id     = ""
   subnet_ids = []
 }

@@ -1,6 +1,6 @@
 
 module "alb" {
-  source                                  = "git::https://github.com/cloudposse/terraform-aws-alb.git?ref=tags/0.7.0"
+  source                                  = "git@github.com:cloudposse/terraform-aws-alb.git?ref=tags/0.24.0"
   name                                    = var.name
   namespace                               = var.project
   stage                                   = var.environment
@@ -23,7 +23,6 @@ module "alb" {
   health_check_matcher                    = var.health_check_matcher
   access_logs_prefix                      = var.access_logs_prefix
   access_logs_enabled                     = var.access_logs_enabled
-  access_logs_region                      = var.access_logs_region
   alb_access_logs_s3_bucket_force_destroy = var.access_logs_s3_bucket_force_destroy
   deregistration_delay                    = var.deregistration_delay
   deletion_protection_enabled             = var.deletion_protection_enabled
@@ -58,8 +57,9 @@ resource "aws_lb_listener_rule" "redirect_http_to_https" {
   }
 
   condition {
-    field  = "host-header"
-    values = ["*${var.domain}"]
+    host_header {
+      values = ["*${var.domain}"]
+    }
   }
 }
 
