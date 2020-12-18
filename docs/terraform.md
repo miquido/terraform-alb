@@ -21,7 +21,6 @@
 |------|-------------|------|---------|:--------:|
 | access\_logs\_enabled | A boolean flag to enable/disable access\_logs | `bool` | `true` | no |
 | access\_logs\_prefix | The S3 log bucket prefix | `string` | `""` | no |
-| access\_logs\_region | The region for the access\_logs S3 bucket | `string` | `"us-east-1"` | no |
 | access\_logs\_s3\_bucket\_force\_destroy | A boolean that indicates all objects should be deleted from the ALB access logs S3 bucket so that the bucket can be destroyed without error | `bool` | `false` | no |
 | acm\_certificate\_arn | The ARN of the default SSL certificate for HTTPS listener. Required if `https_enabled` is true. | `string` | `""` | no |
 | cross\_zone\_load\_balancing\_enabled | A boolean flag to enable/disable cross zone load balancing | `bool` | `false` | no |
