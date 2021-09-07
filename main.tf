@@ -38,6 +38,7 @@ module "alb" {
   target_group_port                       = var.target_group_port
   target_group_target_type                = var.target_group_target_type
   target_group_additional_tags            = var.target_group_additional_tags
+  additional_certs                        = var.additional_certs
 }
 
 resource "aws_lb_listener_rule" "redirect_http_to_https" {

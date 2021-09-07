@@ -247,3 +247,9 @@ variable "https_ingress_ipv6_cidr_blocks" {
   default     = ["::/0"]
   description = "List of IPv6 CIDR blocks to allow in HTTPS security group"
 }
+
+variable "additional_certs" {
+  type        = list(string)
+  description = "A list of additonal certs to add to the https listerner"
+  default     = []
+}
