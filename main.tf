@@ -1,6 +1,5 @@
-
 module "alb" {
-  source                                  = "git::https://github.com/cloudposse/terraform-aws-alb.git?ref=0.35.3"
+  source                                  = "git::https://github.com/cloudposse/terraform-aws-alb.git?ref=0.36.0"
   name                                    = var.name
   namespace                               = var.project
   stage                                   = var.environment
