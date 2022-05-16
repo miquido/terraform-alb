@@ -19,7 +19,7 @@ This module Application Load Balancer along with AWS ACM TLS/SSL certificate via
 
 | Name | Version |
 |------|---------|
-| <a name="provider_aws"></a> [aws](#provider\_aws) | 4.7.0 |
+| <a name="provider_aws"></a> [aws](#provider\_aws) | ~> 4.7 |
 
 ## Modules
 
