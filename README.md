@@ -25,7 +25,7 @@ This module Application Load Balancer along with AWS ACM TLS/SSL certificate via
 
 | Name | Source | Version |
 |------|--------|---------|
-| <a name="module_alb"></a> [alb](#module\_alb) | git::https://github.com/kkmiquido/terraform-aws-alb | refactor-s3-resource-v4 |
+| <a name="module_alb"></a> [alb](#module\_alb) | cloudposse/alb/aws | 1.5.0 |
 
 ## Resources
 
