@@ -1,5 +1,7 @@
 module "alb" {
-  source                                  = "git::https://github.com/kkmiquido/terraform-aws-alb?ref=refactor-s3-resource-v4" #TODO: restore cloudposse when released
+  source  = "cloudposse/alb/aws"
+  version = "1.5.0"
+
   name                                    = var.name
   namespace                               = var.project
   stage                                   = var.environment
