@@ -1,4 +1,5 @@
 variable "environment" {
+  type        = string
   default     = ""
   description = "Environment name"
 }
@@ -20,6 +21,7 @@ variable "tags" {
 }
 
 variable "domain" {
+  type        = string
   default     = ""
   description = "Domain to request ACM certificate for root domain and wildcard SAN"
 }
@@ -47,11 +49,13 @@ variable "enable_redirect_http_to_https" {
 }
 
 variable "redirect_http_to_https_priority" {
+  type        = number
   default     = 5
   description = "HTTP Listener Rule priority"
 }
 
 variable "redirect_http_to_https_status_code" {
+  type        = string
   default     = "HTTP_301"
   description = "The HTTP redirect code. The redirect is either permanent (HTTP_301) or temporary (HTTP_302)"
 }
