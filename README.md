@@ -25,7 +25,7 @@ This module Application Load Balancer along with AWS ACM TLS/SSL certificate via
 
 | Name | Source | Version |
 |------|--------|---------|
-| <a name="module_alb"></a> [alb](#module\_alb) | cloudposse/alb/aws | 1.9.0 |
+| <a name="module_alb"></a> [alb](#module\_alb) | cloudposse/alb/aws | 1.10.0 |
 
 ## Resources
 
