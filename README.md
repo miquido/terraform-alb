@@ -11,7 +11,7 @@ This module Application Load Balancer along with AWS ACM TLS/SSL certificate via
 | Name | Version |
 |------|---------|
 | <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 0.13 |
-| <a name="requirement_aws"></a> [aws](#requirement\_aws) | ~> 4.7 |
+| <a name="requirement_aws"></a> [aws](#requirement\_aws) | ~> 5.16 |
 | <a name="requirement_local"></a> [local](#requirement\_local) | >= 1.3 |
 | <a name="requirement_null"></a> [null](#requirement\_null) | >= 2.0 |
 
@@ -19,7 +19,7 @@ This module Application Load Balancer along with AWS ACM TLS/SSL certificate via
 
 | Name | Version |
 |------|---------|
-| <a name="provider_aws"></a> [aws](#provider\_aws) | ~> 4.7 |
+| <a name="provider_aws"></a> [aws](#provider\_aws) | ~> 5.16 |
 
 ## Modules
 
