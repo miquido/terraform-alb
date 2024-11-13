@@ -1,5 +1,5 @@
 module "alb" {
-  source  = "git::https://github.com/miquido/terraform-alb"
+  source  = "git::https://github.com/miquido/terraform-aws-alb"
 
   name                                    = var.name
   namespace                               = var.project
