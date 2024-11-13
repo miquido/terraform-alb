@@ -1,6 +1,5 @@
 module "alb" {
-  source  = "cloudposse/alb/aws"
-  version = "1.9.0"
+  source  = "git::https://github.com/miquido/terraform-alb"
 
   name                                    = var.name
   namespace                               = var.project
