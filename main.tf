@@ -66,15 +66,6 @@ resource "aws_lb_listener_rule" "redirect_http_to_https" {
   }
 }
 
-resource "aws_s3_bucket_public_access_block" "alb-logs" {
-  count                   = var.access_logs_enabled ? 1 : 0
-  bucket                  = module.alb.access_logs_bucket_id
-  block_public_acls       = true
-  block_public_policy     = true
-  ignore_public_acls      = true
-  restrict_public_buckets = true
-}
-
 resource "aws_security_group_rule" "allow-http-ipv6" {
   count             = var.http_enabled ? 1 : 0
   security_group_id = module.alb.security_group_id
