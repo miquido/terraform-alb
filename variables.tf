@@ -257,3 +257,9 @@ variable "additional_certs" {
   description = "A list of additonal certs to add to the https listerner"
   default     = []
 }
+
+variable "access_logs_s3_bucket_id" {
+  type        = string
+  default     = null
+  description = "An external S3 Bucket name to store access logs in. If specified, no logging bucket will be created."
+}

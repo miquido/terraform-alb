@@ -1,6 +1,6 @@
 module "alb" {
   source  = "cloudposse/alb/aws"
-  version = "1.9.0"
+  version = "2.1.0"
 
   name                                    = var.name
   namespace                               = var.project
@@ -24,6 +24,7 @@ module "alb" {
   health_check_matcher                    = var.health_check_matcher
   access_logs_prefix                      = var.access_logs_prefix
   access_logs_enabled                     = var.access_logs_enabled
+  access_logs_s3_bucket_id                = var.access_logs_s3_bucket_id
   alb_access_logs_s3_bucket_force_destroy = var.access_logs_s3_bucket_force_destroy
   deregistration_delay                    = var.deregistration_delay
   deletion_protection_enabled             = var.deletion_protection_enabled
