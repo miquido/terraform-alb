@@ -1,6 +1,6 @@
 module "alb" {
   source  = "cloudposse/alb/aws"
-  version = "2.1.0"
+  version = "2.2.2"
 
   name                                    = var.name
   namespace                               = var.project
